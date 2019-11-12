@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
+import DetailsPage from './pages/DetailsPage/DetailsPage'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      index_of_user: "",
+    }
+  };
+
+  updateIndex = (value) => {
+    this.setState({ index_of_user: value })
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route path="/" exact render={()=><MainPage  updateIndex={()=>{this.updateIndex(this.state.index_of_user)}}/>} />
+            <Route path="/detail" render={()=><DetailsPage index_of_user={this.state.index_of_user}/>} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
