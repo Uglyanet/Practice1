@@ -3,34 +3,50 @@ import React, { Component } from 'react'
 import './Table.css';
 
 class Table extends Component {
-    render() {
-        const { friends, updateIndex } = this.props;
-        let tableTemplate;
 
-        const openCard = () => {
-            
+    render() {
+        const { friends, type_of_users } = this.props;
+        // const tableTemplateAll,;
+        const activeFriends = friends.filter(function (e) {
+            return e.isActive === true;
+        });
+
+        const openCard = (i) => {
+            localStorage.setItem("num_of_user", i);
             document.location.href = "http://localhost:3000/detail";
         }
 
-        tableTemplate = friends.map((row, i) => {
+        const tableTemplateAll = friends.map((row, i) => {
             return (
-                // <Link to="/detail" params={{index: i}}>
                 <tr key={i} onClick={() => {
-                    openCard();
-                    updateIndex(i);
+                    openCard(i);
                 }}>
                     <td headers="name" >{row.name.first} {row.name.last}</td>
                     <td headers="email" width="150px" >{row.email}</td>
                     <td headers="phone" width="150px" >{row.phone}</td>
                     <td headers="friends" width="150px" >{row.friends.length}</td>
-                    <td>{i}</td>
-                    {/* <td>{row}</td> */}
-
-
                 </tr>
-                //  </Link>
             )
         })
+        //ПРОБЛЕМА!!! НЕПОНЯТНО
+        // const tableTemplateActive = activeFriends.map((row, i) => {
+        //     return (
+        //         <tr key={i} onClick={() => {
+        //             openCard(i);
+        //         }}>
+        //             <td headers="name" >{row.name.first} {row.name.last}</td>
+        //             <td headers="email" width="150px" >{row.email}</td>
+        //             <td headers="phone" width="150px" >{row.phone}</td>
+        //             <td headers="friends" width="150px" >{row.friends.length}</td>
+        //         </tr>
+        //     )
+        // })
+
+        // const trueTable = () => {
+        //     return (type_of_users === 'isActive' ? tableTemplateActive() : tableTemplateAll());
+        // }
+        //ПРОБЛЕМА!!! НЕПОНЯТНО
+
 
         return (
             <div className="container_table_buttons">
@@ -43,7 +59,8 @@ class Table extends Component {
                                 <th id="phone" width="150px" >Phone</th>
                                 <th id="friends" width="150px" >Friends</th>
                             </tr>
-                            {tableTemplate}
+                            {/* {trueTable} */}
+                            {tableTemplateAll}
                         </tbody >
                     </table>
                 </div >

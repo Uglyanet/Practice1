@@ -5,11 +5,11 @@ import ControlForm from '../../components/ControlForm/ControlForm';
 
 class MainPage extends Component {
   render() {
-    const {index_of_user, updateIndex} = this.props;
+    const { showTypeUsers, type_of_users } = this.props;
     return (
       <div className="App">
-        <ControlForm />
-        <Table friends={friends} index_of_user={index_of_user} updateIndex={()=>updateIndex(index_of_user)}/>
+        <ControlForm showTypeUsers={showTypeUsers} />
+        <Table friends={friends} type_of_users={type_of_users}/>
       </div>
     );
   }

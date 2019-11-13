@@ -5,15 +5,16 @@ import DetailsPage from './pages/DetailsPage/DetailsPage'
 import './App.css';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      index_of_user: "",
+      type_of_users: 'isActive',
     }
-  };
+  }
 
-  updateIndex = (value) => {
-    this.setState({ index_of_user: value })
+  showTypeUsers = () => {
+    this.state.type_of_users==='isActive'?
+    this.setState({ type_of_users: 'all' }):this.setState({ type_of_users: 'isActive' })
   }
 
   render() {
@@ -21,8 +22,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route path="/" exact render={()=><MainPage  updateIndex={()=>{this.updateIndex(this.state.index_of_user)}}/>} />
-            <Route path="/detail" render={()=><DetailsPage index_of_user={this.state.index_of_user}/>} />
+            <Route path="/" exact render={() => <MainPage showTypeUsers={this.showTypeUsers} type_of_users={this.state.type_of_users}/>}/>} />
+            <Route path="/detail" render={() => <DetailsPage />} />
           </Switch>
         </div>
       </BrowserRouter>
